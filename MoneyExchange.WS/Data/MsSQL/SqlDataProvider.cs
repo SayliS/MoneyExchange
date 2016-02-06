@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 
 namespace MoneyExchangeWS.Data.MsSQL
 {
-    public sealed class SQLDataBaseSingleton : IDataBase
+    public sealed class SQLDataBaseProvider : IDataBase
     {
-        static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(SQLDataBaseSingleton));
+        static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(SQLDataBaseProvider));
 
         static readonly string _server = @"DESKTOP-BRDGFPA";
         static readonly string _dataBase = "Eurosys";

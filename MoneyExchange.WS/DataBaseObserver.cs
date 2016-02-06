@@ -1,8 +1,5 @@
-﻿using MoneyExchangeWS.MockData;
-using System;
-using Oanda;
+﻿using System;
 using MoneyExchangeWS.Data;
-using System.Threading;
 
 namespace MoneyExchange.WS
 {

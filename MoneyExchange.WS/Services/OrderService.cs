@@ -1,29 +1,26 @@
 ﻿using System;
+using Rabun.Oanda.Rest.Base;
+using Rabun.Oanda.Rest.Factories;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Endpoints;
-using Rabun.Oanda.Rest.Factories;
-using Rabun.Oanda.Rest.Base;
-using Rabun.Oanda.Rest.Endpoints;
-using MoneyExchangeWS.Endpoints.Oanda;
 using MoneyExchangeWS.Logging;
 
 namespace MoneyExchangeWS.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         readonly IHaveOrderEndpoint _orderEndpoint;
         readonly ILogDataToDb<Deal> _dealLogger;
-        static readonly DefaultFactory factory = new DefaultFactory("0393f0fde4d0d4b20c09447c75c653e2-c89a9d13f747598753765dd346f2ffbb",
-            AccountType.practice,
-            7181960);
 
-        public OrderService()
+        public OrderService(IHaveOrderEndpoint orderEndpoint, ILogDataToDb<Deal> dealLogger)
         {
-            var ep = factory.GetEndpoint<OrderEndpoints>();
-            var ep2 = new OandaOrderEndpoint(ep);
-            _orderEndpoint = ep2;
+            if (ReferenceEquals(dealLogger, null) == true)
+                throw new ArgumentNullException(nameof(dealLogger));
+            _dealLogger = dealLogger;
 
-            _dealLogger = new DealsDbLogger();
+            if (ReferenceEquals(orderEndpoint, null) == true)
+                throw new ArgumentNullException(nameof(orderEndpoint));
+            _orderEndpoint = orderEndpoint;
         }
 
         public void OpenOrder(Deal deal)

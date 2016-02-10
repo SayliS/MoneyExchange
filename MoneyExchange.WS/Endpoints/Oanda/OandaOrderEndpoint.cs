@@ -1,6 +1,5 @@
 ﻿using System;
 using Rabun.Oanda.Rest.Endpoints;
-using Rabun.Oanda.Rest.Models;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Logging;
 using MoneyExchangeWS.Extensions;

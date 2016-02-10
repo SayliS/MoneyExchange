@@ -9,16 +9,16 @@ namespace MoneyExchangeWS.Endpoints.Oanda
     public class OandaRateEndpoint : IHaveRateEndpoint
     {
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(OandaRateEndpoint));
-        readonly RateEndpoints _endpoint;
+        readonly RateEndpoints _rateEndPoint;
 
         List<Price> _cachePrices;
         DateTime _nextUpdate;
 
-        public OandaRateEndpoint(RateEndpoints endpoint)
+        public OandaRateEndpoint(RateEndpoints rateEndpoint)
         {
-            if (ReferenceEquals(endpoint, null) == true)
-                throw new ArgumentNullException(nameof(endpoint));
-            _endpoint = endpoint;
+            if (ReferenceEquals(rateEndpoint, null) == true)
+                throw new ArgumentNullException(nameof(rateEndpoint));
+            _rateEndPoint = rateEndpoint;
 
             _cachePrices = new List<Price>();
             UpdatePrices();
@@ -29,7 +29,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             if (_nextUpdate > DateTime.UtcNow)
                 return;
 
-            var prices = _endpoint.GetPrices("EUR_USD,EUR_GBP,EUR_CHF,EUR_TRY,EUR_DKK,EUR_SEK,EUR_NOK").Result;
+            var prices = _rateEndPoint.GetPrices("EUR_USD,EUR_GBP,EUR_CHF,EUR_TRY,EUR_DKK,EUR_SEK,EUR_NOK").Result;
             _cachePrices = prices;
             _nextUpdate = DateTime.UtcNow.AddMinutes(2);
         }

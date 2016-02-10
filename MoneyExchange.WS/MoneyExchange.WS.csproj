@@ -115,7 +115,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\oanda-repo\oanda-rest-cs\Oanda.Rest\Oanda.Rest.csproj">
+    <ProjectReference Include="..\Oanda.Rest\Oanda.Rest.csproj">
       <Project>{8e4e35dd-5cee-4b6d-af8e-9290d9b282bd}</Project>
       <Name>Oanda.Rest</Name>
     </ProjectReference>

@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyExchange.WS", "MoneyExchange.WS\MoneyExchange.WS.csproj", "{2D285DED-483E-427C-A540-789831D908FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oanda.Rest", "oanda-repo\oanda-rest-cs\Oanda.Rest\Oanda.Rest.csproj", "{8E4E35DD-5CEE-4B6D-AF8E-9290D9B282BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oanda.Rest", "Oanda.Rest\Oanda.Rest.csproj", "{8E4E35DD-5CEE-4B6D-AF8E-9290D9B282BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

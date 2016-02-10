@@ -6,29 +6,41 @@ using MoneyExchangeWS.Dtos;
 
 namespace MoneyExchangeWS.Data
 {
-    public class DealsReadRepository : DataWorker, IReadOnlyRepository<DealDto>
+    public class DealsReadRepository : DataWorker, IReadOnlyRepository<Deal>
     {
+        readonly static string _mainDealsView = "DealsForOandaView";
 
-        public IEnumerable<DealDto> GetAll
+        public IEnumerable<Deal> GetAll
         {
             get
             {
                 using (IDbConnection connection = database.CreateOpenConnection())
                 {
-                    var deals = connection.Query<DealDto>("select KassaDealID, KassaDealDate from KassaDeals");
+                    var deals = connection.Query<Deal>(string.Format("select * from {0}", _mainDealsView));
                     return deals;
                 }
             }
         }
 
-        public DealDto GetById(int id)
+        public Deal GetById(int kasaDealId)
+        {
+            return GetById(kasaDealId, 1);
+        }
+
+        public Deal GetById(int kasaDealId, int rowNumber)
+        {
+            return GetById(string.Format("{0}@{1}", kasaDealId, rowNumber));
+        }
+
+        public Deal GetById(string id)
         {
             using (IDbConnection connection = database.CreateOpenConnection())
             {
-                var deal = connection.Query<DealDto>("select KassaDealID, KassaDealDate from KassaDeals where KassaDealID = @KassaDealID",
-                    new { KassaDealID = id }).Single();
+                var deal = connection.Query<Deal>(string.Format("select * from {0} where Id = @Id", _mainDealsView),
+                    new { mainDealsView = _mainDealsView, Id = id }).Single();
                 return deal;
             }
         }
+
     }
 }

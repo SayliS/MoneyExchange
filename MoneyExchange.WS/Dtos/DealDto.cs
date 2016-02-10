@@ -1,40 +1,46 @@
 ﻿using System;
+using MoneyExchangeWS.Endpoints.Oanda;
 
 namespace MoneyExchangeWS.Dtos
 {
-    //public class Deal
-    //{
-    //    public int Id { get; private set; }
-
-    //    public decimal Amount { get; set; }
-
-    //    public decimal CurrencyRate { get; set; }
-
-    //    public string CurrencyBuyType { get; set; }
-
-    //    public string CurrencySellType { get; set; }
-
-    //    public DateTime CreateDate { get; set; }
-
-    //    public DateTime ImportDate { get; set; }
-
-    //    public Deal(int id)
-    //    {
-    //        Id = id;
-    //    }
-    //}
-
-    public class DealDto
+    public class Deal
     {
-        public int KassaDealID { get; private set; }
+        Deal() { }
 
-        public DateTime KassaDealDate { get; set; }
-
-        public DealDto(int kasaId)
+        public Deal(int kassaDealId, int rowNumber)
         {
-            KassaDealID = kasaId;
+            Id = string.Format("{0}@{1}", kassaDealId, rowNumber);
         }
 
-        DealDto() { }
+        public string Id { get; private set; }
+
+        public DateTime CreateDate { get; private set; }
+
+        int OperationId { get; set; }
+
+        public string Currency { get; private set; }
+
+        public int Units { get; private set; }
+
+        public int KassaDealID { get { return int.Parse(Id.Split('@')[0]); } }
+
+        public int RowNumber { get { return int.Parse(Id.Split('@')[1]); } }
+
+        public OrderOperation Operation
+        {
+            get
+            {
+                switch (OperationId)
+                {
+                    case 1:
+                        return OrderOperation.Buy;
+                    case 2:
+                        return OrderOperation.Sell;
+                    default:
+                        throw new NotSupportedException(string.Format("Operation {0} is not supported", OperationId));
+                }
+            }
+        }
+        public string Instrument { get { return "EUR_USD"; } }
     }
 }

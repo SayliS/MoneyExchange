@@ -59,10 +59,6 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Rabun.Oanda.Rest, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rabun.Oanda.Rest.Cs.1.0.3\lib\portable-net45+sl5+wp8+win8\Rabun.Oanda.Rest.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -87,6 +83,16 @@
     <Compile Include="DataBaseObserver.cs" />
     <Compile Include="Data\DataWorker.cs" />
     <Compile Include="Dtos\DealDto.cs" />
+    <Compile Include="Endpoints\IHaveOrderEndpoint.cs" />
+    <Compile Include="Endpoints\IHaveRateEndpoint.cs" />
+    <Compile Include="Endpoints\Oanda\OandaOrderEndpoint.cs" />
+    <Compile Include="Endpoints\Oanda\OandaRateEndpoint.cs" />
+    <Compile Include="Extensions\OrderOperationExtensions.cs" />
+    <Compile Include="Extensions\SideExtensions.cs" />
+    <Compile Include="Logging\DealsDbLogger.cs" />
+    <Compile Include="Logging\ILogDataToDb.cs" />
+    <Compile Include="Services\ExchangeService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Repositories\DealsReadRepository.cs" />
     <Compile Include="Data\IDataBase.cs" />
     <Compile Include="Repositories\IReadOnlyRepository.cs" />
@@ -107,6 +113,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\oanda-repo\oanda-rest-cs\Oanda.Rest\Oanda.Rest.csproj">
+      <Project>{8e4e35dd-5cee-4b6d-af8e-9290d9b282bd}</Project>
+      <Name>Oanda.Rest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

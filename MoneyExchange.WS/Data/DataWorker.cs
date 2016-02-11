@@ -11,7 +11,7 @@ namespace MoneyExchangeWS.Data
         {
             try
             {
-                _database = new SQLDataBaseProvider();
+                _database = new SQLDataBaseProvider(); // IOC?
             }
             catch (Exception excep)
             {

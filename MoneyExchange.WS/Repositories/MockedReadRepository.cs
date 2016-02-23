@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Dapper;
 using MoneyExchangeWS.Dtos;
+using MoneyExchangeWS.Orders;
 
 namespace MoneyExchangeWS.Data
 {
@@ -14,8 +12,8 @@ namespace MoneyExchangeWS.Data
             get
             {
                 return new List<Deal> {
-                      new Deal(1, 1) { Currency = "GBP", OperationId = 1, Units = 100 },
-                      new Deal(2, 2) { Currency = "GBP", OperationId = 2, Units = 500 }
+                      new Deal(1, 1, OrderOperation.Buy, "GBP", 100),
+                      new Deal(1, 1, OrderOperation.Sell, "GBP", 500),
                 };
             }
         }

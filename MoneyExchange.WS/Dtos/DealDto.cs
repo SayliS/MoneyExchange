@@ -12,19 +12,28 @@ namespace MoneyExchangeWS.Dtos
             Id = string.Format("{0}@{1}", kassaDealId, rowNumber);
         }
 
+        public Deal(int kassaDealId, int rowNumber, OrderOperation operation, string currency, float units)
+            : this(kassaDealId, rowNumber)
+        {
+            // TODO Checks
+            OperationId = (int)operation;
+            Currency = currency;
+            Units = units;
+        }
+
         public string Id { get; private set; }
-
-        public DateTime CreateDate { get; private set; }
-
-        public int OperationId { get; set; }
 
         public int KassaDealID { get { return int.Parse(Id.Split('@')[0]); } }
 
         public int RowNumber { get { return int.Parse(Id.Split('@')[1]); } }
 
-        public string Currency { get; set; }
+        public DateTime CreateDate { get; private set; }
 
-        public float Units { get; set; }
+        int OperationId { get; set; }
+
+        public string Currency { get; private set; }
+
+        public float Units { get; private set; }
 
         public OrderOperation Operation
         {
@@ -37,7 +46,7 @@ namespace MoneyExchangeWS.Dtos
                     case 2:
                         return OrderOperation.Sell;
                     default:
-                        throw new NotSupportedException(string.Format("Operation {0} is not supported", OperationId));
+                        throw new NotSupportedException($"Operation {OperationId} is not supported");
                 }
             }
         }

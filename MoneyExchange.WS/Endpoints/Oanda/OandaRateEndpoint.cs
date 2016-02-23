@@ -34,22 +34,22 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             _nextUpdate = DateTime.UtcNow.AddMinutes(2);
         }
 
-        public float GetSellPrice(string term)
+        public float GetSellPrice(string instrument)
         {
             UpdatePrices();
 
-            var price = _cachePrices.FirstOrDefault(w => w.Instrument == term.ToUpper());
+            var price = _cachePrices.FirstOrDefault(w => w.Instrument == instrument.ToUpper());
             if (ReferenceEquals(price, null) == true)
                 throw new Exception("fix me");
 
             return price.Ask;
         }
 
-        public float GetBuyPrice(string term)
+        public float GetBuyPrice(string instrument)
         {
             UpdatePrices();
 
-            var price = _cachePrices.FirstOrDefault(w => w.Instrument == term.ToUpper());
+            var price = _cachePrices.FirstOrDefault(w => w.Instrument == instrument.ToUpper());
             if (ReferenceEquals(price, null) == true)
                 throw new Exception("fix me");
 

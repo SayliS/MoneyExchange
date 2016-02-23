@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Castle.Windsor;
 using MoneyExchangeWS.Data;
 using MoneyExchangeWS.Dtos;

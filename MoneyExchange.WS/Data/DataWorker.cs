@@ -5,6 +5,7 @@ namespace MoneyExchangeWS.Data
 {
     public class DataWorker
     {
+        // TODO: APP SETTINGS
         static IDataBase _readDataBase = null;
         static IDataBase _writeDataBase = null;
         static readonly string _server = @"DESKTOP-BRDGFPA";

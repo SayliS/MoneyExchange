@@ -2,8 +2,8 @@
 {
     public interface IHaveRateEndpoint
     {
-        float GetSellPrice(string term);
+        float GetSellPrice(string instrument);
 
-        float GetBuyPrice(string term);
+        float GetBuyPrice(string instrument);
     }
 }

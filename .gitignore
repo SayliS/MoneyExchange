@@ -242,3 +242,4 @@ $RECYCLE.BIN/
 
 # Directories which start with '.'
 **/.*/
+oanda-repo/oanda-rest-cs

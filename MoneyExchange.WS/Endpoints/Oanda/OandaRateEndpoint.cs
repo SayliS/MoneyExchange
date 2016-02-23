@@ -44,5 +44,16 @@ namespace MoneyExchangeWS.Endpoints.Oanda
 
             return price.Ask;
         }
+
+        public float GetBidPrice(string term)
+        {
+            UpdatePrices();
+
+            var price = _cachePrices.FirstOrDefault(w => w.Instrument == term.ToUpper());
+            if (ReferenceEquals(price, null) == true)
+                throw new Exception("fix me");
+
+            return price.Bid;
+        }
     }
 }

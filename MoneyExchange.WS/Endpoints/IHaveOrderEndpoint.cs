@@ -1,10 +1,11 @@
 ﻿using MoneyExchangeWS.Dtos;
-using MoneyExchangeWS.Logging;
+using MoneyExchangeWS.Repositories.Logging;
+using MoneyExchangeWS.Services;
 
 namespace MoneyExchangeWS.Endpoints
 {
     public interface IHaveOrderEndpoint
     {
-        void CreateMarketOrder(Deal deal, ILogDataToDb<Deal> dealLogger);
+        void CreateMarketOrder(Deal deal, ILogToDbRepository<Deal> dealLogger, IRateService rateService);
     }
 }

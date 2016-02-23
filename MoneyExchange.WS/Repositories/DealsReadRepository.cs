@@ -14,7 +14,7 @@ namespace MoneyExchangeWS.Data
         {
             get
             {
-                using (IDbConnection connection = database.CreateOpenConnection())
+                using (IDbConnection connection = readDatabase.CreateOpenConnection())
                 {
                     var deals = connection.Query<Deal>(string.Format("select * from {0}", _mainDealsView));
                     return deals;
@@ -34,7 +34,7 @@ namespace MoneyExchangeWS.Data
 
         public Deal GetById(string id)
         {
-            using (IDbConnection connection = database.CreateOpenConnection())
+            using (IDbConnection connection = readDatabase.CreateOpenConnection())
             {
                 var deal = connection.Query<Deal>(string.Format("select * from {0} where Id = @Id", _mainDealsView),
                     new { mainDealsView = _mainDealsView, Id = id }).Single();

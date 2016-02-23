@@ -1,8 +1,9 @@
 ﻿using System;
 using Rabun.Oanda.Rest.Endpoints;
 using MoneyExchangeWS.Dtos;
-using MoneyExchangeWS.Logging;
 using MoneyExchangeWS.Extensions;
+using MoneyExchangeWS.Repositories.Logging;
+using MoneyExchangeWS.Services;
 
 namespace MoneyExchangeWS.Endpoints.Oanda
 {
@@ -18,13 +19,13 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             _orderEndpoint = orderEndpoint;
         }
 
-        public void CreateMarketOrder(Deal deal, ILogDataToDb<Deal> dealLogger)
+        public void CreateMarketOrder(Deal deal, ILogToDbRepository<Deal> dealLogger, IRateService rateService)
         {
             try
             {
                 var res = _orderEndpoint.CreateMarketOrder(deal.Instrument,
-                    deal.Units,
-                    deal.Operation.ToSide());
+                        deal.Units,
+                        deal.Operation.ToSide());
 
                 var x = res.Result.TradeOpened.Id;
                 dealLogger.Info(deal);

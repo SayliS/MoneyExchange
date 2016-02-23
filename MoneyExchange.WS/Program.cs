@@ -18,7 +18,7 @@
             //service.Stop();
 #else
             System.ServiceProcess.ServiceBase[] ServicesToRun;
-            ServicesToRun = new System.ServiceProcess.ServiceBase[] { new Service1() };
+            ServicesToRun = new System.ServiceProcess.ServiceBase[] { new MoneyExchangeService() };
             System.ServiceProcess.ServiceBase.Run(ServicesToRun);
 #endif
         }

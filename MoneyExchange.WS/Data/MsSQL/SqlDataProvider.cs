@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace MoneyExchangeWS.Data.MsSQL
@@ -6,13 +7,25 @@ namespace MoneyExchangeWS.Data.MsSQL
     public sealed class SQLDataBaseProvider : IDataBase
     {
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(SQLDataBaseProvider));
+        string _connectionString;
 
-        static readonly string _server = @"DESKTOP-BRDGFPA";
-        static readonly string _dataBase = "Eurosys";
-        static readonly string _userName = "moneyexchange";
-        static readonly string _password = "123qwe";
-        static readonly string _connectionString = string.Format("Server={0};Database={1};User Id={2};Password={3};",
-            _server, _dataBase, _userName, _password);
+        public SQLDataBaseProvider(string server, string dataBase, string userName, string password)
+        {
+            if (string.IsNullOrWhiteSpace(server) == true)
+                throw new ArgumentNullException(nameof(server));
+
+            if (string.IsNullOrWhiteSpace(dataBase) == true)
+                throw new ArgumentNullException(nameof(dataBase));
+
+            if (string.IsNullOrWhiteSpace(userName) == true)
+                throw new ArgumentNullException(nameof(userName));
+
+            if (string.IsNullOrWhiteSpace(password) == true)
+                throw new ArgumentNullException(nameof(password));
+
+            _connectionString = string.Format("Server={0};Database={1};User Id={2};Password={3};",
+            server, dataBase, userName, password);
+        }
 
         public IDbConnection CreateConnection()
         {

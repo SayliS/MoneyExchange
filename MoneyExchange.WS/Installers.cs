@@ -7,7 +7,7 @@ using MoneyExchangeWS.Data;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Endpoints;
 using MoneyExchangeWS.Endpoints.Oanda;
-using MoneyExchangeWS.Logging;
+using MoneyExchangeWS.Repositories.Logging;
 using MoneyExchangeWS.Services;
 
 namespace MoneyExchangeWS
@@ -32,7 +32,7 @@ namespace MoneyExchangeWS
                     .DependsOn(oandaDependencies))
                 .Register(Component.For<IHaveRateEndpoint>().ImplementedBy<OandaRateEndpoint>().LifestyleTransient())
                 .Register(Component.For<IHaveOrderEndpoint>().ImplementedBy<OandaOrderEndpoint>().LifestyleTransient())
-                .Register(Component.For<ILogDataToDb<Deal>>().ImplementedBy<DealsDbLogger>().LifestyleTransient())
+                .Register(Component.For<ILogToDbRepository<Deal>>().ImplementedBy<DealsLogRepository>().LifestyleTransient())
                 .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient())
                 .Register(Component.For<IOrderService>().ImplementedBy<OrderService>().LifestyleTransient())
                 .Register(Component.For<IRateService>().ImplementedBy<RateService>().LifestyleTransient());

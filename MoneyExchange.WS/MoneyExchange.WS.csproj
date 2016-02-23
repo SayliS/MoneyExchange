@@ -103,6 +103,7 @@
     <Compile Include="Orders\OrderOperation.cs" />
     <Compile Include="Repositories\Logging\DealsDbLogger.cs" />
     <Compile Include="Repositories\Logging\ILogDataToDb.cs" />
+    <Compile Include="Repositories\MockedReadRepository.cs" />
     <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\IRateService.cs" />
     <Compile Include="Services\OrderService.cs" />

@@ -38,9 +38,5 @@ namespace MoneyExchangeWS.Endpoints.Oanda
         }
     }
 
-    public enum OrderOperation
-    {
-        Sell = 1,
-        Buy = 2
-    }
+
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using MoneyExchangeWS.Endpoints.Oanda;
+using MoneyExchangeWS.Orders;
 
 namespace MoneyExchangeWS.Dtos
 {

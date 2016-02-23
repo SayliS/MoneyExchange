@@ -1,6 +1,6 @@
-﻿using MoneyExchangeWS.Endpoints.Oanda;
+﻿using System;
 using Rabun.Oanda.Rest.Models;
-using System;
+using MoneyExchangeWS.Orders;
 
 namespace MoneyExchangeWS.Extensions
 {

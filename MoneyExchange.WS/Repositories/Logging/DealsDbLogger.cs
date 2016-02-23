@@ -1,8 +1,7 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using MoneyExchangeWS.Data;
 using MoneyExchangeWS.Dtos;
-using System.Collections.Generic;
-using System.Data;
 
 namespace MoneyExchangeWS.Repositories.Logging
 {

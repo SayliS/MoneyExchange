@@ -2,6 +2,7 @@
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Endpoints;
 using MoneyExchangeWS.Repositories.Logging;
+using MoneyExchangeWS.Orders;
 
 namespace MoneyExchangeWS.Services
 {
@@ -26,11 +27,16 @@ namespace MoneyExchangeWS.Services
             _rateService = rateService;
         }
 
-        public void OpenOrder(Deal deal)
+        public void OpenOrder(IOrder order)
         {
-            if (ReferenceEquals(deal, null) == true)
-                throw new ArgumentNullException(nameof(deal));
-            _orderEndpoint.CreateMarketOrder(deal, _dealLogger, _rateService);
+            if (ReferenceEquals(order, null) == true)
+                throw new ArgumentNullException(nameof(order));
+            _orderEndpoint.CreateMarketOrder(order, null, _dealLogger);
+        }
+
+        public IOrder ConverFromDeal(Deal deal)
+        {
+            return new Order(deal, _rateService);
         }
     }
 }

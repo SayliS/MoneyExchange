@@ -1,9 +1,9 @@
 ﻿using System;
 using Rabun.Oanda.Rest.Endpoints;
-using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Extensions;
+using MoneyExchangeWS.Orders;
 using MoneyExchangeWS.Repositories.Logging;
-using MoneyExchangeWS.Services;
+using MoneyExchangeWS.Dtos;
 
 namespace MoneyExchangeWS.Endpoints.Oanda
 {
@@ -19,21 +19,23 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             _orderEndpoint = orderEndpoint;
         }
 
-        public void CreateMarketOrder(Deal deal, ILogToDbRepository<Deal> dealLogger, IRateService rateService)
+        public void CreateMarketOrder(IOrder order, ILogToDbRepository<IOrder> orderLogger, ILogToDbRepository<Deal> dealLogger)
         {
             try
             {
-                var res = _orderEndpoint.CreateMarketOrder(deal.Instrument,
-                        deal.Units,
-                        deal.Operation.ToSide());
+                var res = _orderEndpoint.CreateMarketOrder(order.Instrument,
+                        order.Units,
+                        order.Operation.ToSide());
 
                 var x = res.Result.TradeOpened.Id;
-                dealLogger.Info(deal);
+                orderLogger.Info(order);
+                dealLogger.Info(order.Deal);
             }
             catch (Exception ex)
             {
-                log.Error(string.Format("Cannot create order for {0} {1} {2}", deal.Instrument, deal.Units, deal.Operation), ex);
-                dealLogger.Error(deal);
+                log.Error(string.Format("Cannot create order for {0} {1} {2}", order.Instrument, order.Units, order.Operation), ex);
+                orderLogger.Error(order);
+                dealLogger.Error(order.Deal);
             }
         }
     }

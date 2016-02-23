@@ -2,7 +2,7 @@
 {
     public interface IRateService
     {
-        float GetAskPrice(string term);
-        float GetBidPrice(string term);
+        float GetSellPrice(string term);
+        float GetBuyPrice(string term);
     }
 }

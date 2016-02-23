@@ -27,8 +27,13 @@ namespace MoneyExchange.WS
                 var deals = readonlyDealsRepository.GetAll;
 
                 IOrderService orderService = _container.Resolve<IOrderService>();
-                var order = orderService.ConverFromDeal(deals.First());//todo fix
-                orderService.OpenOrder(order);
+
+                foreach (var deal in deals)
+                {
+                    var order = orderService.ConverFromDeal(deal);
+                    orderService.OpenOrder(order);
+                }
+
             }
             catch (Exception ex)
             {

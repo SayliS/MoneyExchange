@@ -16,15 +16,15 @@ namespace MoneyExchangeWS.Dtos
 
         public DateTime CreateDate { get; private set; }
 
-        int OperationId { get; set; }
-
-        public string Currency { get; private set; }
-
-        public int Units { get; private set; }
+        public int OperationId { get; set; }
 
         public int KassaDealID { get { return int.Parse(Id.Split('@')[0]); } }
 
         public int RowNumber { get { return int.Parse(Id.Split('@')[1]); } }
+
+        public string Currency { get; set; }
+
+        public float Units { get; set; }
 
         public OrderOperation Operation
         {
@@ -41,6 +41,6 @@ namespace MoneyExchangeWS.Dtos
                 }
             }
         }
-        public string Instrument { get { return "EUR_USD"; } }
+        public string Instrument { get { return $"EUR_{Currency}"; } }
     }
 }

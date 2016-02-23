@@ -13,20 +13,20 @@ namespace MoneyExchangeWS.Services
             _rateEndPoint = rateEndPoint;
         }
 
-        public float GetAskPrice(string term)
+        public float GetSellPrice(string term)
         {
             if (string.IsNullOrWhiteSpace(term) == true)
                 throw new ArgumentException(nameof(term));
 
-            return _rateEndPoint.GetAskPrice(term);
+            return _rateEndPoint.GetSellPrice(term);
         }
 
-        public float GetBidPrice(string term)
+        public float GetBuyPrice(string term)
         {
             if (string.IsNullOrWhiteSpace(term) == true)
                 throw new ArgumentException(nameof(term));
 
-            return _rateEndPoint.GetBidPrice(term);
+            return _rateEndPoint.GetBuyPrice(term);
         }
     }
 }

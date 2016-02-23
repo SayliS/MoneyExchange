@@ -33,7 +33,8 @@ namespace MoneyExchangeWS
                 .Register(Component.For<IHaveRateEndpoint>().ImplementedBy<OandaRateEndpoint>().LifestyleTransient())
                 .Register(Component.For<IHaveOrderEndpoint>().ImplementedBy<OandaOrderEndpoint>().LifestyleTransient())
                 .Register(Component.For<ILogToDbRepository<Deal>>().ImplementedBy<DealsLogRepository>().LifestyleTransient())
-                .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient())
+                //.Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient())
+                .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<MockedReadRepository>().LifestyleTransient())
                 .Register(Component.For<IOrderService>().ImplementedBy<OrderService>().LifestyleTransient())
                 .Register(Component.For<IRateService>().ImplementedBy<RateService>().LifestyleTransient());
         }

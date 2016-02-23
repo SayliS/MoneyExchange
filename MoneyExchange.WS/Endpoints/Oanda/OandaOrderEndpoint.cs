@@ -28,7 +28,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
                         order.Operation.ToSide());
 
                 var x = res.Result.TradeOpened.Id;
-                orderLogger.Info(order);
+                //orderLogger.Info(order);
                 dealLogger.Info(order.Deal);
             }
             catch (Exception ex)

@@ -34,7 +34,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             _nextUpdate = DateTime.UtcNow.AddMinutes(2);
         }
 
-        public float GetAskPrice(string term)
+        public float GetSellPrice(string term)
         {
             UpdatePrices();
 
@@ -45,7 +45,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             return price.Ask;
         }
 
-        public float GetBidPrice(string term)
+        public float GetBuyPrice(string term)
         {
             UpdatePrices();
 

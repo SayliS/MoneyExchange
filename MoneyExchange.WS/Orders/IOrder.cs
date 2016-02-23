@@ -7,7 +7,6 @@ namespace MoneyExchangeWS.Orders
         string Instrument { get; }
         OrderOperation Operation { get; }
         Deal Deal { get; }
-
         int Units { get; }
     }
 }

@@ -19,10 +19,27 @@ namespace MoneyExchangeWS.Orders
 
             this.deal = deal;
             this.rateService = rateService;
+
+            Calculate();
         }
 
         void Calculate()
         {
+            if (Operation == OrderOperation.Buy)
+            {
+                var euroCource = rateService.GetBuyPrice(deal.Instrument);
+                var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
+
+                Units = euroSum;
+            }
+
+            if (Operation == OrderOperation.Sell)
+            {
+                var euroCource = rateService.GetSellPrice(deal.Instrument);
+                var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
+
+                Units = euroSum;
+            }
 
         }
 
@@ -31,19 +48,17 @@ namespace MoneyExchangeWS.Orders
 
         public string Instrument => deal.Instrument;
 
-        public OrderOperation Operation => deal.Operation;
-
-        public int Units
+        public OrderOperation Operation
         {
             get
             {
-                throw new NotImplementedException();
-            }
-
-            private set
-            {
-
+                if (deal.Operation == OrderOperation.Buy)
+                    return OrderOperation.Sell;
+                else
+                    return OrderOperation.Buy;
             }
         }
+
+        public int Units { get; private set; }
     }
 }

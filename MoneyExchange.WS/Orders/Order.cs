@@ -21,35 +21,28 @@ namespace MoneyExchangeWS.Orders
             this.rateService = rateService;
         }
 
-        public Deal Deal
+        void Calculate()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+
         }
 
-        public string Instrument
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
 
-        public OrderOperation Operation
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public Deal Deal => deal;
+
+        public string Instrument => deal.Instrument;
+
+        public OrderOperation Operation => deal.Operation;
 
         public int Units
         {
             get
             {
                 throw new NotImplementedException();
+            }
+
+            private set
+            {
+
             }
         }
     }

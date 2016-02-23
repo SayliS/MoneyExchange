@@ -1,8 +1,8 @@
 ﻿using System;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Endpoints;
-using MoneyExchangeWS.Repositories.Logging;
 using MoneyExchangeWS.Orders;
+using MoneyExchangeWS.Repositories.Logging;
 
 namespace MoneyExchangeWS.Services
 {

@@ -15,7 +15,12 @@ namespace MoneyExchangeWS.Dtos
         public Deal(int kassaDealId, int rowNumber, OrderOperation operation, string currency, float units)
             : this(kassaDealId, rowNumber)
         {
-            // TODO Checks
+            if (ReferenceEquals(operation, null) == true)
+                throw new ArgumentNullException(nameof(operation));
+
+            if (string.IsNullOrWhiteSpace(currency) == true)
+                throw new ArgumentNullException(nameof(currency));
+
             OperationId = (int)operation;
             Currency = currency;
             Units = units;

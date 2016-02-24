@@ -10,7 +10,6 @@ namespace MoneyExchangeWS.Orders
         readonly Deal deal;
         public Order(Deal deal, IRateService rateService)
         {
-
             if (ReferenceEquals(deal, null) == true)
                 throw new ArgumentNullException(nameof(deal));
 
@@ -25,28 +24,25 @@ namespace MoneyExchangeWS.Orders
 
         void Calculate()
         {
+            float euroCource = 0.0f;
+
             if (Operation == OrderOperation.Buy)
-            {
-                var euroCource = rateService.GetBuyPrice(deal.Instrument);
-                var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
+                euroCource = rateService.GetBuyPrice(deal.Instrument);
+            else if (Operation == OrderOperation.Sell)
+                euroCource = rateService.GetSellPrice(deal.Instrument);
+            else
+                throw new NotSupportedException("Wrong OrderOperation");
 
-                Units = euroSum;
-            }
-
-            if (Operation == OrderOperation.Sell)
-            {
-                var euroCource = rateService.GetSellPrice(deal.Instrument);
-                var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
-
-                Units = euroSum;
-            }
+            var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
+            Units = euroSum;
 
         }
-
 
         public Deal Deal => deal;
 
         public string Instrument => deal.Instrument;
+
+        public int Units { get; private set; }
 
         public OrderOperation Operation
         {
@@ -54,11 +50,12 @@ namespace MoneyExchangeWS.Orders
             {
                 if (deal.Operation == OrderOperation.Buy)
                     return OrderOperation.Sell;
-                else
+
+                if (deal.Operation == OrderOperation.Sell)
                     return OrderOperation.Buy;
+
+                throw new NotSupportedException("Wrong OrderOperation");
             }
         }
-
-        public int Units { get; private set; }
     }
 }

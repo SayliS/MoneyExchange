@@ -10,19 +10,21 @@ using MoneyExchangeWS.Endpoints.Oanda;
 using MoneyExchangeWS.Loggers;
 using MoneyExchangeWS.Services;
 using MoneyExchangeWS.Orders;
+using System.Configuration;
+using System;
 
 namespace MoneyExchangeWS
 {
     public class Installers : IWindsorInstaller
     {
-        static readonly string _key = "0393f0fde4d0d4b20c09447c75c653e2-c89a9d13f747598753765dd346f2ffbb";
-        static readonly AccountType _аccountType = AccountType.practice;
-        static readonly int _accountId = 7181960;
+        static readonly string apiKey = ConfigurationManager.AppSettings.Get("OandaApiKey");
+        static readonly AccountType аccountType = (AccountType)Enum.Parse(typeof(AccountType), ConfigurationManager.AppSettings.Get("OandaAccountType"), true);
+        static readonly int accountId = int.Parse(ConfigurationManager.AppSettings.Get("OandaAccountId"));
 
         Dependency[] oandaDependencies = {
-            Dependency.OnValue("key", _key),
-            Dependency.OnValue("accountType", _аccountType),
-            Dependency.OnValue("accountId", _accountId)
+            Dependency.OnValue("key", apiKey),
+            Dependency.OnValue("accountType", аccountType),
+            Dependency.OnValue("accountId", accountId)
         };
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
@@ -34,10 +36,10 @@ namespace MoneyExchangeWS
                 .Register(Component.For<IHaveRateEndpoint>().ImplementedBy<OandaRateEndpoint>().LifestyleTransient())
                 .Register(Component.For<IHaveOrderEndpoint>().ImplementedBy<OandaOrderEndpoint>().LifestyleTransient())
                 .Register(Component.For<ICanLogToDataBase<IOrder>>().ImplementedBy<OrderLogger>().LifestyleTransient())
-                .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient())
-                //.Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<MockedReadRepository>().LifestyleTransient())
                 .Register(Component.For<IOrderService>().ImplementedBy<OrderService>().LifestyleTransient())
-                .Register(Component.For<IRateService>().ImplementedBy<RateService>().LifestyleTransient());
+                .Register(Component.For<IRateService>().ImplementedBy<RateService>().LifestyleTransient())
+                .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient());
+            //.Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<MockedReadRepository>().LifestyleTransient());
         }
     }
 }

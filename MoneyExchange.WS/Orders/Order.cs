@@ -44,6 +44,8 @@ namespace MoneyExchangeWS.Orders
 
         public float EuroCource { get; private set; }
 
+        public long ExternalId { get; private set; }
+
         public OrderOperation Operation
         {
             get
@@ -56,6 +58,11 @@ namespace MoneyExchangeWS.Orders
 
                 throw new NotSupportedException("Wrong OrderOperation");
             }
+        }
+
+        public void AddExternalId(long externalId)
+        {
+            ExternalId = externalId;
         }
     }
 }

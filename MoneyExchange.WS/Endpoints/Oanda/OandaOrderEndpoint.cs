@@ -32,13 +32,14 @@ namespace MoneyExchangeWS.Endpoints.Oanda
                         order.Units,
                         order.Operation.ToSide());
 
-                var x = res.Result.TradeOpened.Id;
+                order.AddExternalId(res.Result.TradeOpened.Id);
                 orderLogger.Info(order);
             }
             catch (Exception ex)
             {
-                log.Error(string.Format("Cannot create order for {0} {1} {2}", order.Instrument, order.Units, order.Operation), ex);
-                orderLogger.Error(order);
+                var errorMessage = string.Format("Cannot create order for {0} {1} {2}", order.Instrument, order.Units, order.Operation);
+                log.Error(errorMessage, ex);
+                orderLogger.Error(order, ex.InnerException.Message);
             }
         }
     }

@@ -9,5 +9,8 @@ namespace MoneyExchangeWS.Orders
         Deal Deal { get; }
         int Units { get; }
         float EuroCource { get; }
+        long ExternalId { get; }
+
+        void AddExternalId(long externalId);
     }
 }

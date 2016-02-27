@@ -5,12 +5,12 @@ namespace MoneyExchangeWS.Services
 {
     public class RateService : IRateService
     {
-        readonly IHaveRateEndpoint _rateEndPoint;
+        readonly IHaveRateEndpoint rateEndPoint;
         public RateService(IHaveRateEndpoint rateEndPoint)
         {
             if (ReferenceEquals(rateEndPoint, null) == true)
                 throw new ArgumentNullException(nameof(rateEndPoint));
-            _rateEndPoint = rateEndPoint;
+            this.rateEndPoint = rateEndPoint;
         }
 
         public float GetSellPrice(string instrument)
@@ -18,7 +18,7 @@ namespace MoneyExchangeWS.Services
             if (string.IsNullOrWhiteSpace(instrument) == true)
                 throw new ArgumentException(nameof(instrument));
 
-            return _rateEndPoint.GetSellPrice(instrument);
+            return rateEndPoint.GetSellPrice(instrument);
         }
 
         public float GetBuyPrice(string instrument)
@@ -26,7 +26,7 @@ namespace MoneyExchangeWS.Services
             if (string.IsNullOrWhiteSpace(instrument) == true)
                 throw new ArgumentException(nameof(instrument));
 
-            return _rateEndPoint.GetBuyPrice(instrument);
+            return rateEndPoint.GetBuyPrice(instrument);
         }
     }
 }

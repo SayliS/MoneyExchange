@@ -1,11 +1,10 @@
-﻿using MoneyExchangeWS.Dtos;
+﻿using MoneyExchangeWS.Loggers;
 using MoneyExchangeWS.Orders;
-using MoneyExchangeWS.Repositories.Logging;
 
 namespace MoneyExchangeWS.Endpoints
 {
     public interface IHaveOrderEndpoint
     {
-        void CreateMarketOrder(IOrder order, ILogToDbRepository<IOrder> orderLogger, ILogToDbRepository<Deal> dealLogger);
+        void CreateMarketOrder(IOrder order, ICanLogToDataBase<IOrder> orderLogger);
     }
 }

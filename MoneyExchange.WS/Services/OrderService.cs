@@ -1,42 +1,44 @@
 ﻿using System;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Endpoints;
+using MoneyExchangeWS.Loggers;
 using MoneyExchangeWS.Orders;
-using MoneyExchangeWS.Repositories.Logging;
 
 namespace MoneyExchangeWS.Services
 {
     public class OrderService : IOrderService
     {
-        readonly IHaveOrderEndpoint _orderEndpoint;
-        readonly ILogToDbRepository<Deal> _dealLogger;
-        readonly IRateService _rateService;
-
-        public OrderService(IHaveOrderEndpoint orderEndpoint, IRateService rateService, ILogToDbRepository<Deal> dealLogger)
+        readonly IHaveOrderEndpoint orderEndpoint;
+        readonly IRateService rateService;
+        readonly ICanLogToDataBase<IOrder> orderLogger;
+        public OrderService(IHaveOrderEndpoint orderEndpoint,
+                            IRateService rateService,
+                            ICanLogToDataBase<IOrder> orderLogger)
         {
-            if (ReferenceEquals(dealLogger, null) == true)
-                throw new ArgumentNullException(nameof(dealLogger));
-            _dealLogger = dealLogger;
-
             if (ReferenceEquals(orderEndpoint, null) == true)
                 throw new ArgumentNullException(nameof(orderEndpoint));
-            _orderEndpoint = orderEndpoint;
+            this.orderEndpoint = orderEndpoint;
 
             if (ReferenceEquals(rateService, null) == true)
                 throw new ArgumentNullException(nameof(rateService));
-            _rateService = rateService;
+            this.rateService = rateService;
+
+            if (ReferenceEquals(orderLogger, null) == true)
+                throw new ArgumentNullException(nameof(orderLogger));
+            this.orderLogger = orderLogger;
         }
 
         public void OpenOrder(IOrder order)
         {
             if (ReferenceEquals(order, null) == true)
                 throw new ArgumentNullException(nameof(order));
-            _orderEndpoint.CreateMarketOrder(order, null, _dealLogger);
+
+            orderEndpoint.CreateMarketOrder(order, orderLogger);
         }
 
         public IOrder ConverFromDeal(Deal deal)
         {
-            return new Order(deal, _rateService);
+            return new Order(deal, rateService);
         }
     }
 }

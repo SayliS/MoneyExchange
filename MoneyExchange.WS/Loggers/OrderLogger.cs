@@ -1,27 +1,27 @@
 ﻿using System.Data;
 using Dapper;
 using MoneyExchangeWS.Data;
-using MoneyExchangeWS.Dtos;
+using MoneyExchangeWS.Orders;
 
-namespace MoneyExchangeWS.Repositories.Logging
+namespace MoneyExchangeWS.Loggers
 {
-    public class DealsLogRepository : DataWorker, ILogToDbRepository<Deal>
+    public class OrderLogger : DataWorker, ICanLogToDataBase<IOrder>
     {
-        public void Error(Deal deal)
+        public void Error(IOrder order)
         {
             string statement = "INSERT INTO ERRORS VALUES (@KassaDealID, @RowNumber)";
             using (IDbConnection connection = writeDatabase.CreateOpenConnection())
             {
-                connection.Execute(statement, new { deal.KassaDealID, deal.RowNumber });
+                //connection.Execute(statement, new { order.KassaDealID, order.RowNumber });
             }
         }
 
-        public void Info(Deal deal)
+        public void Info(IOrder order)
         {
             string statement = "INSERT INTO INFO VALUES (@KassaDealID, @RowNumber)";
             using (IDbConnection connection = writeDatabase.CreateOpenConnection())
             {
-                connection.Execute(statement, new { deal.KassaDealID, deal.RowNumber });
+                //connection.Execute(statement, new { order.KassaDealID, order.RowNumber });
             }
         }
     }

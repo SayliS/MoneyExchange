@@ -24,16 +24,14 @@ namespace MoneyExchangeWS.Orders
 
         void Calculate()
         {
-            float euroCource = 0.0f;
-
             if (Operation == OrderOperation.Buy)
-                euroCource = rateService.GetBuyPrice(deal.Instrument);
+                EuroCource = rateService.GetBuyPrice(deal.Instrument);
             else if (Operation == OrderOperation.Sell)
-                euroCource = rateService.GetSellPrice(deal.Instrument);
+                EuroCource = rateService.GetSellPrice(deal.Instrument);
             else
                 throw new NotSupportedException("Wrong OrderOperation");
 
-            var euroSum = (int)Math.Round(deal.Units / euroCource, 0);
+            var euroSum = (int)Math.Round(deal.Units / EuroCource, 0);
             Units = euroSum;
 
         }
@@ -43,6 +41,8 @@ namespace MoneyExchangeWS.Orders
         public string Instrument => deal.Instrument;
 
         public int Units { get; private set; }
+
+        public float EuroCource { get; private set; }
 
         public OrderOperation Operation
         {

@@ -8,5 +8,6 @@ namespace MoneyExchangeWS.Orders
         OrderOperation Operation { get; }
         Deal Deal { get; }
         int Units { get; }
+        float EuroCource { get; }
     }
 }

@@ -11,6 +11,6 @@ namespace MoneyExchangeWS.Orders
         float EuroCource { get; }
         long ExternalId { get; }
 
-        void AddExternalId(long externalId);
+        void SetExternalId(long externalId);
     }
 }

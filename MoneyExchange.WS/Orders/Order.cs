@@ -60,7 +60,7 @@ namespace MoneyExchangeWS.Orders
             }
         }
 
-        public void AddExternalId(long externalId)
+        public void SetExternalId(long externalId)
         {
             ExternalId = externalId;
         }

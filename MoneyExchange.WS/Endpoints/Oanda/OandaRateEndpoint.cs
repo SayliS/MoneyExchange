@@ -60,7 +60,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             var price = _cachePrices.FirstOrDefault(w => w.Instrument == instrument.ToUpper());
             if (ReferenceEquals(price, null) == true)
             {
-                var errorMsg = $"Cannot get sell price for {instrument}";
+                var errorMsg = $"Cannot get buy price for {instrument}";
                 log.Error(errorMsg);
                 throw new Exception(errorMsg);
             }

@@ -32,7 +32,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
                         order.Units,
                         order.Operation.ToSide());
 
-                order.AddExternalId(res.Result.TradeOpened.Id);
+                order.SetExternalId(res.Result.TradeOpened.Id);
                 orderLogger.Info(order);
             }
             catch (Exception ex)

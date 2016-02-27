@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Rabun.Oanda.Rest.Endpoints;
 using Rabun.Oanda.Rest.Models;
@@ -10,13 +11,15 @@ namespace MoneyExchangeWS.Endpoints.Oanda
     {
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(OandaRateEndpoint));
         readonly RateEndpoints _rateEndPoint;
-        readonly string supportedInstrument = "EUR_USD,EUR_GBP,EUR_CHF,EUR_TRY,EUR_DKK,EUR_SEK,EUR_NOK";
+        readonly string supportedInstruments = ConfigurationManager.AppSettings.Get("OandaRateEndpointSupportedInstruments");
+        readonly int updateTime = int.Parse(ConfigurationManager.AppSettings.Get("OandaRateEndpointUpdateTime"));
 
         List<Price> _cachePrices;
         DateTime _nextUpdate;
 
         public OandaRateEndpoint(RateEndpoints rateEndpoint)
         {
+
             if (ReferenceEquals(rateEndpoint, null) == true)
                 throw new ArgumentNullException(nameof(rateEndpoint));
             _rateEndPoint = rateEndpoint;
@@ -30,9 +33,9 @@ namespace MoneyExchangeWS.Endpoints.Oanda
             if (_nextUpdate > DateTime.UtcNow)
                 return;
 
-            var prices = _rateEndPoint.GetPrices(supportedInstrument).Result;
+            var prices = _rateEndPoint.GetPrices(supportedInstruments).Result;
             _cachePrices = prices;
-            _nextUpdate = DateTime.UtcNow.AddMinutes(2);
+            _nextUpdate = DateTime.UtcNow.AddMinutes(1);
         }
 
         public float GetSellPrice(string instrument)

@@ -23,28 +23,24 @@ namespace MoneyExchange.WS
                 _container = container;
 
                 var readonlyDealsRepository = _container.Resolve<IReadOnlyRepository<Deal>>();
+                var orderService = _container.Resolve<IOrderService>();
+
                 var deals = readonlyDealsRepository.GetAll;
-
-                IOrderService orderService = _container.Resolve<IOrderService>();
-
                 foreach (var deal in deals)
                 {
                     var order = orderService.ConverFromDeal(deal);
                     orderService.OpenOrder(order);
                 }
-
             }
             catch (Exception ex)
             {
-
-                log.Error(string.Format("Error in {0}", nameof(DataBaseObserver)), ex);
+                log.Error($"Error in {nameof(DataBaseObserver)}", ex);
             }
-
         }
 
         public static void Stop()
         {
-            log.Info(string.Format("Stopping {0}", nameof(DataBaseObserver)));
+            log.Info($"Stopping {nameof(DataBaseObserver)}");
         }
     }
 }

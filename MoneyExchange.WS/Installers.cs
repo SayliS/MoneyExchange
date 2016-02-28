@@ -38,8 +38,8 @@ namespace MoneyExchangeWS
                 .Register(Component.For<ICanLogToDataBase<IOrder>>().ImplementedBy<OrderLogger>().LifestyleTransient())
                 .Register(Component.For<IOrderService>().ImplementedBy<OrderService>().LifestyleTransient())
                 .Register(Component.For<IRateService>().ImplementedBy<RateService>().LifestyleTransient())
-                .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient());
-            //.Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<MockedReadRepository>().LifestyleTransient());
+            //    .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<DealsReadRepository>().LifestyleTransient());
+            .Register(Component.For<IReadOnlyRepository<Deal>>().ImplementedBy<MockedReadRepository>().LifestyleTransient());
         }
     }
 }

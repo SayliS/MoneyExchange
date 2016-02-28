@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.ServiceProcess;
-using System.Threading;
+﻿using System.ServiceProcess;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 
@@ -9,7 +7,6 @@ namespace MoneyExchange.WS
     public partial class MoneyExchangeService : ServiceBase
     {
         readonly IWindsorContainer container;
-        readonly int updateTime = int.Parse(ConfigurationManager.AppSettings.Get("ExecutionSleepIntervalInSeconds")) * 1000;
 
         public MoneyExchangeService()
         {
@@ -21,11 +18,7 @@ namespace MoneyExchange.WS
 
         protected override void OnStart(string[] args)
         {
-            while (true)
-            {
-                DataBaseObserver.Start(container);
-                Thread.Sleep(updateTime);
-            }
+            DataBaseObserver.Start(container);
         }
 
         protected override void OnStop()

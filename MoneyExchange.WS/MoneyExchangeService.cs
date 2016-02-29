@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Quartz;
 using Quartz.Impl;
+using System.Threading;
 
 namespace MoneyExchange.WS
 {
@@ -23,6 +24,24 @@ namespace MoneyExchange.WS
 
         protected override void OnStart(string[] args)
         {
+            ThreadStart threadDelegate = new ThreadStart(gg);
+            Thread newThread = new Thread(threadDelegate);
+            newThread.Start();
+        }
+
+        protected override void OnStop()
+        {
+            scheduler.Shutdown();
+            DataBaseObserver.Stop();
+        }
+
+        public void Debug()
+        {
+            OnStart(null);
+        }
+
+        void gg()
+        {
             scheduler.Start();
             var jobDataMap = new JobDataMap();
             jobDataMap.Add("container", container);
@@ -39,19 +58,7 @@ namespace MoneyExchange.WS
                 //http://www.quartz-scheduler.net/documentation/quartz-2.x/tutorial/crontriggers.html
                 .WithCronSchedule(cronSchedule)
                 .Build();
-
             scheduler.ScheduleJob(job, trigger);
-        }
-
-        protected override void OnStop()
-        {
-            scheduler.Shutdown();
-            DataBaseObserver.Stop();
-        }
-
-        public void Debug()
-        {
-            OnStart(null);
         }
     }
 }

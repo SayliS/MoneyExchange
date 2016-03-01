@@ -50,13 +50,14 @@ namespace MoneyExchangeWS.Orders
         {
             get
             {
-                if (deal.Operation == OrderOperation.Buy)
-                    return OrderOperation.Sell;
+                return deal.Operation;
+                //if (deal.Operation == OrderOperation.Buy)
+                //    return OrderOperation.Sell;
 
-                if (deal.Operation == OrderOperation.Sell)
-                    return OrderOperation.Buy;
+                //if (deal.Operation == OrderOperation.Sell)
+                //    return OrderOperation.Buy;
 
-                throw new NotSupportedException("Wrong OrderOperation");
+                //throw new NotSupportedException("Wrong OrderOperation");
             }
         }
 

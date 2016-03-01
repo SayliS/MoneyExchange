@@ -12,7 +12,7 @@ namespace MoneyExchangeWS.Endpoints.Oanda
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(OandaRateEndpoint));
         readonly RateEndpoints _rateEndPoint;
         readonly string supportedInstruments = ConfigurationManager.AppSettings.Get("OandaRateEndpointSupportedInstruments");
-        readonly int updateTime = int.Parse(ConfigurationManager.AppSettings.Get("OandaRateEndpointUpdateTime"));
+        readonly int updateTime = int.Parse(ConfigurationManager.AppSettings.Get("OandaRateEndpointUpdateTimeInMinutes"));
 
         List<Price> _cachePrices;
         DateTime _nextUpdate;

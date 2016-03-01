@@ -34,10 +34,11 @@ namespace MoneyExchangeWS.Endpoints.Oanda
 
                 order.SetExternalId(res.Result.TradeOpened.Id);
                 orderLogger.Info(order);
+                log.Info($"Order {order.ExternalId} created. Instrument={order.Instrument}, Units={order.Units} Operation={order.Operation}");
             }
             catch (Exception ex)
             {
-                var errorMessage = string.Format("Cannot create order for {0} {1} {2}", order.Instrument, order.Units, order.Operation);
+                var errorMessage = $"Cannot create order for Instrument={order.Instrument}, Units={order.Units} Operation={order.Operation}";
                 log.Error(errorMessage, ex);
                 orderLogger.Error(order, ex.InnerException.Message);
             }

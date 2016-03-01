@@ -1,43 +1,40 @@
 ﻿using System.Configuration;
 using System.ServiceProcess;
+using System.Threading;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Quartz;
 using Quartz.Impl;
-using System.Threading;
 
 namespace MoneyExchange.WS
 {
     public partial class MoneyExchangeService : ServiceBase
     {
         readonly IWindsorContainer container;
-        IScheduler scheduler;
-        static readonly string cronSchedule = ConfigurationManager.AppSettings.Get("CronSchedule");
-        static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MoneyExchangeService));
+        readonly IScheduler scheduler;
+        readonly string cronSchedule = ConfigurationManager.AppSettings.Get("CronSchedule");
+        Thread workerThread;
+
         public MoneyExchangeService()
         {
-            log4net.Config.XmlConfigurator.Configure();
-            log.Info($"Starting {nameof(MoneyExchangeService)}");
             InitializeComponent();
             container = new WindsorContainer();
             container.Install(FromAssembly.This());
             scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            log.Info($"----1----");
-
         }
 
         protected override void OnStart(string[] args)
         {
-            log.Info($"----2start----");
-            ThreadStart threadDelegate = new ThreadStart(gg);
-            Thread newThread = new Thread(threadDelegate);
-            newThread.Start();
+            ThreadStart threadDelegate = new ThreadStart(SchedulWork);
+            workerThread = new Thread(threadDelegate);
+            workerThread.Start();
         }
 
         protected override void OnStop()
         {
-            scheduler.Shutdown();
             DataBaseObserver.Stop();
+            scheduler.Shutdown();
+            workerThread.Abort();
         }
 
         public void Debug()
@@ -45,7 +42,7 @@ namespace MoneyExchange.WS
             OnStart(null);
         }
 
-        void gg()
+        void SchedulWork()
         {
             scheduler.Start();
             var jobDataMap = new JobDataMap();

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Configuration;
-using System.Threading;
 using Castle.Windsor;
+using Quartz;
 using MoneyExchangeWS.Data;
 using MoneyExchangeWS.Dtos;
 using MoneyExchangeWS.Services;
-using Quartz;
 
 namespace MoneyExchange.WS
 {
@@ -14,12 +12,12 @@ namespace MoneyExchange.WS
     {
         static IWindsorContainer _container;
         static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(DataBaseObserver));
-        static readonly int updateTime = int.Parse(ConfigurationManager.AppSettings.Get("ExecutionSleepIntervalInSeconds")) * 1000;
 
         public static void Start(IWindsorContainer container)
         {
             try
             {
+                log4net.Config.XmlConfigurator.Configure();
                 log.Info($"Starting {nameof(DataBaseObserver)}");
 
                 if (ReferenceEquals(container, null) == true)

@@ -81,7 +81,7 @@
 
   <xsl:template name="Component1_ReferencesTemplate" match="@*|node()">
     <xsl:copy>
-      <xsl:for-each select="wix:Wix/wix:Fragment/wix:ComponentGroup/wix:Component/wix:File[@Source and not (contains(@Source, '.pdb')) and not (contains(@Source, '.vshost.')) and (contains(@Source, 'MoneyExchange'))]">
+      <xsl:for-each select="wix:Wix/wix:Fragment/wix:ComponentGroup/wix:Component/wix:File[@Source and not (contains(@Source, '.pdb')) and not (contains(@Source, '.vshost.'))]">
         <xsl:apply-templates select="."/>
       </xsl:for-each>
     </xsl:copy>
@@ -90,7 +90,7 @@
   <xsl:template match="wix:Wix/wix:Fragment/wix:ComponentGroup/wix:Component/wix:File">
     <xsl:copy>
       <xsl:choose>
-        <xsl:when test="not (contains(@Source, 'MoneyExchange.WS.exe')) or (contains(@Source, '.config'))">
+        <xsl:when test="not (contains(@Source, 'MoneyExchangeWS.exe')) or (contains(@Source, '.config'))">
           <xsl:apply-templates select="@*[name()!='KeyPath']"/>
           <xsl:attribute name="Vital">
             <xsl:value-of select="'yes'"/>

@@ -22,10 +22,36 @@
     <Fragment>
         <ComponentGroup Id="MoneyExchangeService_ServiceComponents">
             <Component Id="MoneyExchangeService_ServiceComponent" Directory="MoneyExchangeService_INSTALLFOLDER" Guid="ab621e57-b52d-4bbe-853e-a5f0ca312a73">
-                <File Id="fil6148EC5710A23FF135288D3E0CEF2188" Source="$(var.SourceOutput)\MoneyExchange.Setup.msi" Vital="yes" />
-                <File Id="fil8B53FAC9E222E7C7BBA88135553DD071" Source="$(var.SourceOutput)\MoneyExchange.Setup.wixpdb" Vital="yes" />
-                <File Id="fil3EF56FA831F99986473BCCF8ECC79BD2" Source="$(var.SourceOutput)\MoneyExchangeWS.exe" Vital="yes" />
+                <File Id="fil808D19806529ABA1617D818072819E54" Source="$(var.SourceOutput)\Castle.Core.dll" Vital="yes" />
+                <File Id="fil101D924DE474086DF14A4B5C56071204" Source="$(var.SourceOutput)\Castle.Core.xml" Vital="yes" />
+                <File Id="fil151C8FBAEDA5D4BDEB438F301EAE7FA4" Source="$(var.SourceOutput)\Castle.Windsor.dll" Vital="yes" />
+                <File Id="fil042B0E606CB091E35075A42410EF4F67" Source="$(var.SourceOutput)\Castle.Windsor.xml" Vital="yes" />
+                <File Id="filBBB5ADE394D62529C40C6EE5FB56E04B" Source="$(var.SourceOutput)\Common.Logging.Core.dll" Vital="yes" />
+                <File Id="fil2F5727FF9A5D5ACFF3CC92FCCF016F97" Source="$(var.SourceOutput)\Common.Logging.Core.xml" Vital="yes" />
+                <File Id="fil161923551608B12B0FA85FD1C174AA18" Source="$(var.SourceOutput)\Common.Logging.dll" Vital="yes" />
+                <File Id="filAA1A59EF26C73CEA986BC80B327F7B30" Source="$(var.SourceOutput)\Common.Logging.xml" Vital="yes" />
+                <File Id="fil37C959533EB1A86046CD227075B0148F" Source="$(var.SourceOutput)\Dapper.dll" Vital="yes" />
+                <File Id="fil818F4FF1D4E6C01D20C12BF4BC69DA4B" Source="$(var.SourceOutput)\Dapper.xml" Vital="yes" />
+                <File Id="fil53CF67BC1F7314B08C1D64A6CEA223E4" Source="$(var.SourceOutput)\log4net.dll" Vital="yes" />
+                <File Id="filC2B8A215F89AF1071ADDFC39EAE7D41E" Source="$(var.SourceOutput)\log4net.xml" Vital="yes" />
+                <File Id="filD630E3B86AECDFD0D22D7145F74AC0EF" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.dll" Vital="yes" />
+                <File Id="filC3E74B6AE7D358D2BC5CF5DAB028C08C" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.Extensions.Desktop.dll" Vital="yes" />
+                <File Id="fil4F9B894134B01456723784F6CFE910AD" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.Extensions.Desktop.xml" Vital="yes" />
+                <File Id="fil9DB2769EF75FC4140A1AA7D51327FE1B" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.Extensions.dll" Vital="yes" />
+                <File Id="fil6583B11DBA679A9692C8BA4D684D5F29" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.Extensions.xml" Vital="yes" />
+                <File Id="fil38DC73742CF8B1A715448147BC9E2CD8" Source="$(var.SourceOutput)\Microsoft.Threading.Tasks.xml" Vital="yes" />
+                <File Id="fil3EF56FA831F99986473BCCF8ECC79BD2" KeyPath="yes" Source="$(var.SourceOutput)\MoneyExchangeWS.exe" Vital="yes" />
                 <File Id="filD834ADE9DD32801F7F2D03A62C53BC2B" Source="$(var.SourceOutput)\MoneyExchangeWS.exe.config" Vital="yes" />
+                <File Id="fil7F15BA8094994ADAD04DA907E934B5BD" Source="$(var.SourceOutput)\Newtonsoft.Json.dll" Vital="yes" />
+                <File Id="fil9BA73B8312B77DA2A8D16A6C05D0598B" Source="$(var.SourceOutput)\Newtonsoft.Json.xml" Vital="yes" />
+                <File Id="filB2ECDABEF4D263448B0E529DD4EFD401" Source="$(var.SourceOutput)\Oanda.Rest.dll" Vital="yes" />
+                <File Id="fil1CD8D4C1166819DD1BED355352C10B86" Source="$(var.SourceOutput)\Oanda.Rest.xml" Vital="yes" />
+                <File Id="fil42C2277BB51E383099F80FE480CD64B1" Source="$(var.SourceOutput)\Quartz.dll" Vital="yes" />
+                <File Id="filEF76F47ABDAB6CA160C632D6FB5EF3BE" Source="$(var.SourceOutput)\Quartz.xml" Vital="yes" />
+                <File Id="filAD660CB2A40064A1E1274799E08C84C8" Source="$(var.SourceOutput)\System.Net.Http.Extensions.dll" Vital="yes" />
+                <File Id="filEEE1E09A5561A988C387C975DDC00F78" Source="$(var.SourceOutput)\System.Net.Http.Extensions.xml" Vital="yes" />
+                <File Id="fil289FA39CEE6A23ADAAF66D9987698821" Source="$(var.SourceOutput)\System.Net.Http.Primitives.dll" Vital="yes" />
+                <File Id="fil0E897D24399927CB535F5EA2F687F59C" Source="$(var.SourceOutput)\System.Net.Http.Primitives.xml" Vital="yes" />
                 <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="gg." Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
                 <ServiceControl Id="MoneyExchangeServiceStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
             </Component>

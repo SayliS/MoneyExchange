@@ -10,7 +10,7 @@
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
-    <SourceOutput>$(SolutionDir)..\bin\$(Configuration)</SourceOutput>
+    <SourceOutput>$(SolutionDir)bin\$(Configuration)\MoneyExchangeWS</SourceOutput>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
@@ -30,7 +30,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"$(WIX)\bin\heat.exe" dir "$(SourceOutput)" -cg References -srd -o $(ProjectDir)Product.wxs -nologo -gg -g1 -scom -sreg -t $(ProjectDir)Transformer.xslt -var var.SourceOutput</PreBuildEvent>
+    <PreBuildEvent>&quot;$(WIX)bin\heat.exe&quot; dir "$(SourceOutput)" -cg References -srd -o $(ProjectDir)Product.wxs -nologo -gg -g1 -scom -sreg -t $(ProjectDir)Transformer.xslt -var var.SourceOutput</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

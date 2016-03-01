@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:wix="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" Name="MoneyExchange" Language="1033" Version="1.0.0.0" Manufacturer="KV" UpgradeCode="aec77d2e-b102-491d-8ca4-ba6b5b4b661f">
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of MoneyExchange is already installed." />
+        <MediaTemplate EmbedCab="yes" />
+        <Feature Id="MoneyExchangeService" Title="MoneyExchangeService" Level="1">
+            <ComponentGroupRef Id="MoneyExchangeService_ServiceComponents" />
+        </Feature>
+    </Product>
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="CompanyFolder" Name="KV">
+                    <Directory Id="ProductFolder" Name="MoneyExchange">
+                        <Directory Id="MoneyExchangeService_INSTALLFOLDER" Name="MoneyExchangeServiceService" />
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="MoneyExchangeService_ServiceComponents">
+            <Component Id="MoneyExchangeService_ServiceComponent" Directory="MoneyExchangeService_INSTALLFOLDER" Guid="ab621e57-b52d-4bbe-853e-a5f0ca312a73">
+                <File Id="fil6148EC5710A23FF135288D3E0CEF2188" Source="$(var.SourceOutput)\MoneyExchange.Setup.msi" Vital="yes" />
+                <File Id="fil8B53FAC9E222E7C7BBA88135553DD071" Source="$(var.SourceOutput)\MoneyExchange.Setup.wixpdb" Vital="yes" />
+                <File Id="fil3EF56FA831F99986473BCCF8ECC79BD2" Source="$(var.SourceOutput)\MoneyExchangeWS.exe" Vital="yes" />
+                <File Id="filD834ADE9DD32801F7F2D03A62C53BC2B" Source="$(var.SourceOutput)\MoneyExchangeWS.exe.config" Vital="yes" />
+                <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="gg." Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
+                <ServiceControl Id="MoneyExchangeServiceStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>

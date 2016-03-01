@@ -17,6 +17,9 @@
             //Thread.Sleep(5000);
             //service.Stop();
 #else
+            log4net.ILog log = log4net.LogManager.GetLogger(typeof(Program));
+            log4net.Config.XmlConfigurator.Configure();
+            log.Info($"Starting {nameof(Program)}");
             System.ServiceProcess.ServiceBase[] ServicesToRun;
             ServicesToRun = new System.ServiceProcess.ServiceBase[] { new MoneyExchangeService() };
             System.ServiceProcess.ServiceBase.Run(ServicesToRun);

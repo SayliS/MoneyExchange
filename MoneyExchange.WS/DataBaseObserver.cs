@@ -20,8 +20,7 @@ namespace MoneyExchange.WS
         {
             try
             {
-                log4net.Config.XmlConfigurator.Configure();
-                log.Info(string.Format("Starting {0}", nameof(DataBaseObserver)));
+                log.Info($"Starting {nameof(DataBaseObserver)}");
 
                 if (ReferenceEquals(container, null) == true)
                     throw new ArgumentNullException(nameof(container));

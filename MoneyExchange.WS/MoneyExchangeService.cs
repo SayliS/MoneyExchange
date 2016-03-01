@@ -13,17 +13,22 @@ namespace MoneyExchange.WS
         readonly IWindsorContainer container;
         IScheduler scheduler;
         static readonly string cronSchedule = ConfigurationManager.AppSettings.Get("CronSchedule");
+        static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(MoneyExchangeService));
         public MoneyExchangeService()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            log.Info($"Starting {nameof(MoneyExchangeService)}");
             InitializeComponent();
             container = new WindsorContainer();
             container.Install(FromAssembly.This());
             scheduler = StdSchedulerFactory.GetDefaultScheduler();
+            log.Info($"----1----");
 
         }
 
         protected override void OnStart(string[] args)
         {
+            log.Info($"----2start----");
             ThreadStart threadDelegate = new ThreadStart(gg);
             Thread newThread = new Thread(threadDelegate);
             newThread.Start();

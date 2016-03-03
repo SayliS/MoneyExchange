@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:wix="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="MoneyExchange" Language="1033" Version="1.0.0.0" Manufacturer="KV" UpgradeCode="aec77d2e-b102-491d-8ca4-ba6b5b4b661f">
+    <Product Id="*" Name="MoneyExchange" Language="1033" Version="1.0.0.0" Manufacturer="MG Technologies" UpgradeCode="aec77d2e-b102-491d-8ca4-ba6b5b4b661f">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
         <MajorUpgrade DowngradeErrorMessage="A newer version of MoneyExchange is already installed." />
         <MediaTemplate EmbedCab="yes" />
@@ -11,9 +11,9 @@
     <Fragment>
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="CompanyFolder" Name="KV">
+                <Directory Id="CompanyFolder" Name="MG Technologies">
                     <Directory Id="ProductFolder" Name="MoneyExchange">
-                        <Directory Id="MoneyExchangeService_INSTALLFOLDER" Name="MoneyExchangeServiceService" />
+                        <Directory Id="MoneyExchangeService_INSTALLFOLDER" Name="MoneyExchangeService" />
                     </Directory>
                 </Directory>
             </Directory>
@@ -52,7 +52,7 @@
                 <File Id="filEEE1E09A5561A988C387C975DDC00F78" Source="$(var.SourceOutput)\System.Net.Http.Extensions.xml" Vital="yes" />
                 <File Id="fil289FA39CEE6A23ADAAF66D9987698821" Source="$(var.SourceOutput)\System.Net.Http.Primitives.dll" Vital="yes" />
                 <File Id="fil0E897D24399927CB535F5EA2F687F59C" Source="$(var.SourceOutput)\System.Net.Http.Primitives.xml" Vital="yes" />
-                <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="gg." Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
+                <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="Eurosys integration with OANDA" Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
                 <ServiceControl Id="MoneyExchangeServiceStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
             </Component>
         </ComponentGroup>

@@ -3,7 +3,7 @@
   <xsl:strip-space elements="*"/>
 
 
-  <xsl:variable name="CompanyName">MG Technologies</xsl:variable>
+  <xsl:variable name="CompanyName">KV</xsl:variable>
   <xsl:variable name="ProductName">MoneyExchange</xsl:variable>
   <xsl:variable name="UpgradeCode">aec77d2e-b102-491d-8ca4-ba6b5b4b661f</xsl:variable>
 
@@ -11,7 +11,7 @@
   <xsl:variable name="Component1_Title">MoneyExchangeService</xsl:variable>
   <xsl:variable name="Component1_ServiceExe">MoneyExchange.WS.exe</xsl:variable>
   <xsl:variable name="Component1_ServiceName">MoneyExchangeService</xsl:variable>
-  <xsl:variable name="Component1_ServiceDescr">Eurosys integration with OANDA</xsl:variable>
+  <xsl:variable name="Component1_ServiceDescr">gg.</xsl:variable>
 
   <xsl:template match='/'>
     <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
@@ -32,7 +32,7 @@
           <Directory Id="ProgramFilesFolder">
             <Directory Id="CompanyFolder" Name="{$CompanyName}">
               <Directory Id="ProductFolder" Name="{$ProductName}">
-                <Directory Id="{$Component1}_INSTALLFOLDER" Name="{$Component1}" />
+                <Directory Id="{$Component1}_INSTALLFOLDER" Name="{$Component1}Service" />
               </Directory>
             </Directory>
           </Directory>

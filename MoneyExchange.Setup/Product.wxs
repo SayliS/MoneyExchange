@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:wix="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Name="MoneyExchange" Language="1033" Version="1.0.0.0" Manufacturer="KV" UpgradeCode="aec77d2e-b102-491d-8ca4-ba6b5b4b661f">
+    <Product Id="*" Name="MoneyExchange" Language="1033" Version="1.0.0.0" Manufacturer="MG Technologies" UpgradeCode="aec77d2e-b102-491d-8ca4-ba6b5b4b661f">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
         <MajorUpgrade DowngradeErrorMessage="A newer version of MoneyExchange is already installed." />
         <MediaTemplate EmbedCab="yes" />
-        <Feature Id="MoneyExchangeService" Title="MoneyExchangeService" Level="1">
-            <ComponentGroupRef Id="MoneyExchangeService_ServiceComponents" />
+        <Feature Id="MoneyExchange" Title="MoneyExchangeService" Level="1">
+            <ComponentGroupRef Id="MoneyExchange_ServiceComponents" />
         </Feature>
     </Product>
     <Fragment>
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="ProgramFilesFolder">
-                <Directory Id="CompanyFolder" Name="KV">
+                <Directory Id="CompanyFolder" Name="MG Technologies">
                     <Directory Id="ProductFolder" Name="MoneyExchange">
-                        <Directory Id="MoneyExchangeService_INSTALLFOLDER" Name="MoneyExchangeServiceService" />
+                        <Directory Id="MoneyExchange_INSTALLFOLDER" Name="MoneyExchangeService" />
                     </Directory>
                 </Directory>
             </Directory>
         </Directory>
     </Fragment>
     <Fragment>
-        <ComponentGroup Id="MoneyExchangeService_ServiceComponents">
-            <Component Id="MoneyExchangeService_ServiceComponent" Directory="MoneyExchangeService_INSTALLFOLDER" Guid="ab621e57-b52d-4bbe-853e-a5f0ca312a73">
+        <ComponentGroup Id="MoneyExchange_ServiceComponents">
+            <Component Id="MoneyExchange_ServiceComponent" Directory="MoneyExchange_INSTALLFOLDER" Guid="ab621e57-b52d-4bbe-853e-a5f0ca312a73">
                 <File Id="fil808D19806529ABA1617D818072819E54" Source="$(var.SourceOutput)\Castle.Core.dll" Vital="yes" />
                 <File Id="fil101D924DE474086DF14A4B5C56071204" Source="$(var.SourceOutput)\Castle.Core.xml" Vital="yes" />
                 <File Id="fil151C8FBAEDA5D4BDEB438F301EAE7FA4" Source="$(var.SourceOutput)\Castle.Windsor.dll" Vital="yes" />
@@ -48,12 +48,22 @@
                 <File Id="fil1CD8D4C1166819DD1BED355352C10B86" Source="$(var.SourceOutput)\Oanda.Rest.xml" Vital="yes" />
                 <File Id="fil42C2277BB51E383099F80FE480CD64B1" Source="$(var.SourceOutput)\Quartz.dll" Vital="yes" />
                 <File Id="filEF76F47ABDAB6CA160C632D6FB5EF3BE" Source="$(var.SourceOutput)\Quartz.xml" Vital="yes" />
+                <File Id="fil01DF515DF66A7F7FB99518A28D87D76D" Source="$(var.SourceOutput)\System.IO.dll" Vital="yes" />
+                <File Id="filBCA16F277FB5619FD6B7151C7F607F3B" Source="$(var.SourceOutput)\System.IO.xml" Vital="yes" />
+                <File Id="fil8D921BBEABD9993326747E67D5B657A6" Source="$(var.SourceOutput)\System.Net.Http.dll" Vital="yes" />
                 <File Id="filAD660CB2A40064A1E1274799E08C84C8" Source="$(var.SourceOutput)\System.Net.Http.Extensions.dll" Vital="yes" />
                 <File Id="filEEE1E09A5561A988C387C975DDC00F78" Source="$(var.SourceOutput)\System.Net.Http.Extensions.xml" Vital="yes" />
                 <File Id="fil289FA39CEE6A23ADAAF66D9987698821" Source="$(var.SourceOutput)\System.Net.Http.Primitives.dll" Vital="yes" />
                 <File Id="fil0E897D24399927CB535F5EA2F687F59C" Source="$(var.SourceOutput)\System.Net.Http.Primitives.xml" Vital="yes" />
+                <File Id="filE5023BCD650259782193C222251CBCFE" Source="$(var.SourceOutput)\System.Net.Http.WebRequest.dll" Vital="yes" />
+                <File Id="fil163C4E5D07D6F44597EB26F3A1FF1CE3" Source="$(var.SourceOutput)\System.Net.Http.WebRequest.xml" Vital="yes" />
+                <File Id="fil22FBE3D5677923EA76106AA4E77463CB" Source="$(var.SourceOutput)\System.Net.Http.xml" Vital="yes" />
+                <File Id="fil182542F79221E681CA12F1D7D4A2BEC5" Source="$(var.SourceOutput)\System.Runtime.dll" Vital="yes" />
+                <File Id="fil94EA9FD42E491C95A70966F52CEB1159" Source="$(var.SourceOutput)\System.Runtime.xml" Vital="yes" />
+                <File Id="filA24F6A62977D9960AC1AC6F8EBB31790" Source="$(var.SourceOutput)\System.Threading.Tasks.dll" Vital="yes" />
+                <File Id="fil0BAF8D5847CFB58E66E9E52CD0F4621B" Source="$(var.SourceOutput)\System.Threading.Tasks.xml" Vital="yes" />
                 <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="gg." Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
-                <ServiceControl Id="MoneyExchangeServiceStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
+                <ServiceControl Id="MoneyExchangeStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
             </Component>
         </ComponentGroup>
     </Fragment>

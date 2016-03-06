@@ -62,7 +62,7 @@
                 <File Id="fil94EA9FD42E491C95A70966F52CEB1159" Source="$(var.SourceOutput)\System.Runtime.xml" Vital="yes" />
                 <File Id="filA24F6A62977D9960AC1AC6F8EBB31790" Source="$(var.SourceOutput)\System.Threading.Tasks.dll" Vital="yes" />
                 <File Id="fil0BAF8D5847CFB58E66E9E52CD0F4621B" Source="$(var.SourceOutput)\System.Threading.Tasks.xml" Vital="yes" />
-                <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="gg." Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
+                <ServiceInstall Id="QBServiceInstaller" Type="ownProcess" Vital="yes" Name="MoneyExchangeService" DisplayName="MoneyExchangeService" Description="Eurosys integration with OANDA" Start="auto" Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
                 <ServiceControl Id="MoneyExchangeStartService" Start="install" Stop="both" Remove="uninstall" Name="MoneyExchangeService" Wait="yes" />
             </Component>
         </ComponentGroup>
